@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ArticleTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.ArticleType" >
+    <constructor >
+      <idArg column="article_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_type_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    article_type_id, article_type_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_article_type
+    where article_type_id = #{articleTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_article_type
+    where article_type_id = #{articleTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.ArticleType" >
+    insert into t_article_type (article_type_id, article_type_name)
+    values (#{articleTypeId,jdbcType=INTEGER}, #{articleTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.ArticleType" >
+    insert into t_article_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleTypeId != null" >
+        article_type_id,
+      </if>
+      <if test="articleTypeName != null" >
+        article_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="articleTypeName != null" >
+        #{articleTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.ArticleType" >
+    update t_article_type
+    <set >
+      <if test="articleTypeName != null" >
+        article_type_name = #{articleTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where article_type_id = #{articleTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.ArticleType" >
+    update t_article_type
+    set article_type_name = #{articleTypeName,jdbcType=VARCHAR}
+    where article_type_id = #{articleTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

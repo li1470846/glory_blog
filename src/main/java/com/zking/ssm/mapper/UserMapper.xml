@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.User" >
+    <constructor >
+      <idArg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_nick_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_real_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_birthday" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="user_region" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_trade" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_position" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_integral" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="today_download_size" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="free_download_size" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vip_begin_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="vip_end_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="user_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_password, user_phone, user_nick_name, user_sex, user_real_name, 
+    user_birthday, user_region, user_trade, user_position, user_desc, user_image, user_integral, 
+    identity_id, today_download_size, free_download_size, vip_begin_date, vip_end_date, 
+    user_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.User" >
+    insert into t_user (user_id, user_name, user_password, 
+      user_phone, user_nick_name, user_sex, 
+      user_real_name, user_birthday, user_region, 
+      user_trade, user_position, user_desc, 
+      user_image, user_integral, identity_id, 
+      today_download_size, free_download_size, vip_begin_date, 
+      vip_end_date, user_state)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userNickName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{userRealName,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP}, #{userRegion,jdbcType=VARCHAR}, 
+      #{userTrade,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR}, 
+      #{userImage,jdbcType=VARCHAR}, #{userIntegral,jdbcType=INTEGER}, #{identityId,jdbcType=INTEGER}, 
+      #{todayDownloadSize,jdbcType=INTEGER}, #{freeDownloadSize,jdbcType=INTEGER}, #{vipBeginDate,jdbcType=TIMESTAMP}, 
+      #{vipEndDate,jdbcType=TIMESTAMP}, #{userState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userRealName != null" >
+        user_real_name,
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday,
+      </if>
+      <if test="userRegion != null" >
+        user_region,
+      </if>
+      <if test="userTrade != null" >
+        user_trade,
+      </if>
+      <if test="userPosition != null" >
+        user_position,
+      </if>
+      <if test="userDesc != null" >
+        user_desc,
+      </if>
+      <if test="userImage != null" >
+        user_image,
+      </if>
+      <if test="userIntegral != null" >
+        user_integral,
+      </if>
+      <if test="identityId != null" >
+        identity_id,
+      </if>
+      <if test="todayDownloadSize != null" >
+        today_download_size,
+      </if>
+      <if test="freeDownloadSize != null" >
+        free_download_size,
+      </if>
+      <if test="vipBeginDate != null" >
+        vip_begin_date,
+      </if>
+      <if test="vipEndDate != null" >
+        vip_end_date,
+      </if>
+      <if test="userState != null" >
+        user_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userRealName != null" >
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRegion != null" >
+        #{userRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="userTrade != null" >
+        #{userTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null" >
+        #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDesc != null" >
+        #{userDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userIntegral != null" >
+        #{userIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="identityId != null" >
+        #{identityId,jdbcType=INTEGER},
+      </if>
+      <if test="todayDownloadSize != null" >
+        #{todayDownloadSize,jdbcType=INTEGER},
+      </if>
+      <if test="freeDownloadSize != null" >
+        #{freeDownloadSize,jdbcType=INTEGER},
+      </if>
+      <if test="vipBeginDate != null" >
+        #{vipBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipEndDate != null" >
+        #{vipEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userState != null" >
+        #{userState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.User" >
+    update t_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userRealName != null" >
+        user_real_name = #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday = #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRegion != null" >
+        user_region = #{userRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="userTrade != null" >
+        user_trade = #{userTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null" >
+        user_position = #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDesc != null" >
+        user_desc = #{userDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="userIntegral != null" >
+        user_integral = #{userIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="identityId != null" >
+        identity_id = #{identityId,jdbcType=INTEGER},
+      </if>
+      <if test="todayDownloadSize != null" >
+        today_download_size = #{todayDownloadSize,jdbcType=INTEGER},
+      </if>
+      <if test="freeDownloadSize != null" >
+        free_download_size = #{freeDownloadSize,jdbcType=INTEGER},
+      </if>
+      <if test="vipBeginDate != null" >
+        vip_begin_date = #{vipBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipEndDate != null" >
+        vip_end_date = #{vipEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userState != null" >
+        user_state = #{userState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.User" >
+    update t_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      user_real_name = #{userRealName,jdbcType=VARCHAR},
+      user_birthday = #{userBirthday,jdbcType=TIMESTAMP},
+      user_region = #{userRegion,jdbcType=VARCHAR},
+      user_trade = #{userTrade,jdbcType=VARCHAR},
+      user_position = #{userPosition,jdbcType=VARCHAR},
+      user_desc = #{userDesc,jdbcType=VARCHAR},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      user_integral = #{userIntegral,jdbcType=INTEGER},
+      identity_id = #{identityId,jdbcType=INTEGER},
+      today_download_size = #{todayDownloadSize,jdbcType=INTEGER},
+      free_download_size = #{freeDownloadSize,jdbcType=INTEGER},
+      vip_begin_date = #{vipBeginDate,jdbcType=TIMESTAMP},
+      vip_end_date = #{vipEndDate,jdbcType=TIMESTAMP},
+      user_state = #{userState,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

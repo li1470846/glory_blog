@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.IntegralMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Integral" >
+    <constructor >
+      <idArg column="integral_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="integral_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="integral_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="integral_source" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    integral_id, user_id, integral_count, integral_date, integral_source
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_integral
+    where integral_id = #{integralId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_integral
+    where integral_id = #{integralId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Integral" >
+    insert into t_integral (integral_id, user_id, integral_count, 
+      integral_date, integral_source)
+    values (#{integralId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{integralCount,jdbcType=INTEGER}, 
+      #{integralDate,jdbcType=TIMESTAMP}, #{integralSource,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Integral" >
+    insert into t_integral
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="integralId != null" >
+        integral_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="integralCount != null" >
+        integral_count,
+      </if>
+      <if test="integralDate != null" >
+        integral_date,
+      </if>
+      <if test="integralSource != null" >
+        integral_source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="integralId != null" >
+        #{integralId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="integralCount != null" >
+        #{integralCount,jdbcType=INTEGER},
+      </if>
+      <if test="integralDate != null" >
+        #{integralDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="integralSource != null" >
+        #{integralSource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Integral" >
+    update t_integral
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="integralCount != null" >
+        integral_count = #{integralCount,jdbcType=INTEGER},
+      </if>
+      <if test="integralDate != null" >
+        integral_date = #{integralDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="integralSource != null" >
+        integral_source = #{integralSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where integral_id = #{integralId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Integral" >
+    update t_integral
+    set user_id = #{userId,jdbcType=BIGINT},
+      integral_count = #{integralCount,jdbcType=INTEGER},
+      integral_date = #{integralDate,jdbcType=TIMESTAMP},
+      integral_source = #{integralSource,jdbcType=VARCHAR}
+    where integral_id = #{integralId,jdbcType=INTEGER}
+  </update>
+</mapper>

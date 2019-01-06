@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Visitor" >
+    <constructor >
+      <idArg column="visitor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="visitor_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="visitor_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="visitor_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    visitor_id, user_id, visitor_ip, visitor_date, visitor_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_visitor
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_visitor
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Visitor" >
+    insert into t_visitor (visitor_id, user_id, visitor_ip, 
+      visitor_date, visitor_count)
+    values (#{visitorId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{visitorIp,jdbcType=VARCHAR}, 
+      #{visitorDate,jdbcType=TIMESTAMP}, #{visitorCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Visitor" >
+    insert into t_visitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="visitorId != null" >
+        visitor_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="visitorIp != null" >
+        visitor_ip,
+      </if>
+      <if test="visitorDate != null" >
+        visitor_date,
+      </if>
+      <if test="visitorCount != null" >
+        visitor_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="visitorId != null" >
+        #{visitorId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorIp != null" >
+        #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorDate != null" >
+        #{visitorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorCount != null" >
+        #{visitorCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Visitor" >
+    update t_visitor
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="visitorIp != null" >
+        visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorDate != null" >
+        visitor_date = #{visitorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorCount != null" >
+        visitor_count = #{visitorCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Visitor" >
+    update t_visitor
+    set user_id = #{userId,jdbcType=BIGINT},
+      visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      visitor_date = #{visitorDate,jdbcType=TIMESTAMP},
+      visitor_count = #{visitorCount,jdbcType=INTEGER}
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </update>
+</mapper>

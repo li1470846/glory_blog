@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Message" >
+    <constructor >
+      <idArg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="message_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_id, user_id, message_content, message_url, message_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Message" >
+    insert into t_message (message_id, user_id, message_content, 
+      message_url, message_date)
+    values (#{messageId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{messageContent,jdbcType=VARCHAR}, 
+      #{messageUrl,jdbcType=VARCHAR}, #{messageDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Message" >
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="messageContent != null" >
+        message_content,
+      </if>
+      <if test="messageUrl != null" >
+        message_url,
+      </if>
+      <if test="messageDate != null" >
+        message_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="messageContent != null" >
+        #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messageUrl != null" >
+        #{messageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDate != null" >
+        #{messageDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Message" >
+    update t_message
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="messageContent != null" >
+        message_content = #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messageUrl != null" >
+        message_url = #{messageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDate != null" >
+        message_date = #{messageDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Message" >
+    update t_message
+    set user_id = #{userId,jdbcType=BIGINT},
+      message_content = #{messageContent,jdbcType=VARCHAR},
+      message_url = #{messageUrl,jdbcType=VARCHAR},
+      message_date = #{messageDate,jdbcType=TIMESTAMP}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

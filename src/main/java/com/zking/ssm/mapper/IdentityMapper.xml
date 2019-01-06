@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Identity" >
+    <constructor >
+      <idArg column="identity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="identity_discount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identity_download_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identity_upload_size" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    identity_id, identity_name, identity_discount, identity_download_count, identity_upload_size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_identity
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_identity
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Identity" >
+    insert into t_identity (identity_id, identity_name, identity_discount, 
+      identity_download_count, identity_upload_size
+      )
+    values (#{identityId,jdbcType=INTEGER}, #{identityName,jdbcType=VARCHAR}, #{identityDiscount,jdbcType=INTEGER}, 
+      #{identityDownloadCount,jdbcType=INTEGER}, #{identityUploadSize,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Identity" >
+    insert into t_identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="identityId != null" >
+        identity_id,
+      </if>
+      <if test="identityName != null" >
+        identity_name,
+      </if>
+      <if test="identityDiscount != null" >
+        identity_discount,
+      </if>
+      <if test="identityDownloadCount != null" >
+        identity_download_count,
+      </if>
+      <if test="identityUploadSize != null" >
+        identity_upload_size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="identityId != null" >
+        #{identityId,jdbcType=INTEGER},
+      </if>
+      <if test="identityName != null" >
+        #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityDiscount != null" >
+        #{identityDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="identityDownloadCount != null" >
+        #{identityDownloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="identityUploadSize != null" >
+        #{identityUploadSize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Identity" >
+    update t_identity
+    <set >
+      <if test="identityName != null" >
+        identity_name = #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityDiscount != null" >
+        identity_discount = #{identityDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="identityDownloadCount != null" >
+        identity_download_count = #{identityDownloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="identityUploadSize != null" >
+        identity_upload_size = #{identityUploadSize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Identity" >
+    update t_identity
+    set identity_name = #{identityName,jdbcType=VARCHAR},
+      identity_discount = #{identityDiscount,jdbcType=INTEGER},
+      identity_download_count = #{identityDownloadCount,jdbcType=INTEGER},
+      identity_upload_size = #{identityUploadSize,jdbcType=INTEGER}
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </update>
+</mapper>

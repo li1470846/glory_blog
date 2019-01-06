@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ResourceCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.ResourceComment" >
+    <constructor >
+      <idArg column="resource_comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="resource_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resource_comment_comment" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resource_comment_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="resource_comment_score" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resource_comment_id, user_id, resource_id, resource_comment_comment, resource_comment_date, 
+    resource_comment_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource_comment
+    where resource_comment_id = #{resourceCommentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resource_comment
+    where resource_comment_id = #{resourceCommentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.ResourceComment" >
+    insert into t_resource_comment (resource_comment_id, user_id, resource_id, 
+      resource_comment_comment, resource_comment_date, 
+      resource_comment_score)
+    values (#{resourceCommentId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{resourceId,jdbcType=INTEGER}, 
+      #{resourceCommentComment,jdbcType=VARCHAR}, #{resourceCommentDate,jdbcType=TIMESTAMP}, 
+      #{resourceCommentScore,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.ResourceComment" >
+    insert into t_resource_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceCommentId != null" >
+        resource_comment_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="resourceId != null" >
+        resource_id,
+      </if>
+      <if test="resourceCommentComment != null" >
+        resource_comment_comment,
+      </if>
+      <if test="resourceCommentDate != null" >
+        resource_comment_date,
+      </if>
+      <if test="resourceCommentScore != null" >
+        resource_comment_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceCommentId != null" >
+        #{resourceCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCommentComment != null" >
+        #{resourceCommentComment,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCommentDate != null" >
+        #{resourceCommentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceCommentScore != null" >
+        #{resourceCommentScore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.ResourceComment" >
+    update t_resource_comment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null" >
+        resource_id = #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCommentComment != null" >
+        resource_comment_comment = #{resourceCommentComment,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCommentDate != null" >
+        resource_comment_date = #{resourceCommentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceCommentScore != null" >
+        resource_comment_score = #{resourceCommentScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where resource_comment_id = #{resourceCommentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.ResourceComment" >
+    update t_resource_comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      resource_id = #{resourceId,jdbcType=INTEGER},
+      resource_comment_comment = #{resourceCommentComment,jdbcType=VARCHAR},
+      resource_comment_date = #{resourceCommentDate,jdbcType=TIMESTAMP},
+      resource_comment_score = #{resourceCommentScore,jdbcType=INTEGER}
+    where resource_comment_id = #{resourceCommentId,jdbcType=INTEGER}
+  </update>
+</mapper>

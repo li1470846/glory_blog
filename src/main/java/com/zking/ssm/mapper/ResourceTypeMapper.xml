@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ResourceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.ResourceType" >
+    <constructor >
+      <idArg column="resource_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resource_type_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resource_type_id, resource_type_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource_type
+    where resource_type_id = #{resourceTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resource_type
+    where resource_type_id = #{resourceTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.ResourceType" >
+    insert into t_resource_type (resource_type_id, resource_type_name)
+    values (#{resourceTypeId,jdbcType=INTEGER}, #{resourceTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.ResourceType" >
+    insert into t_resource_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceTypeId != null" >
+        resource_type_id,
+      </if>
+      <if test="resourceTypeName != null" >
+        resource_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceTypeId != null" >
+        #{resourceTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceTypeName != null" >
+        #{resourceTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.ResourceType" >
+    update t_resource_type
+    <set >
+      <if test="resourceTypeName != null" >
+        resource_type_name = #{resourceTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_type_id = #{resourceTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.ResourceType" >
+    update t_resource_type
+    set resource_type_name = #{resourceTypeName,jdbcType=VARCHAR}
+    where resource_type_id = #{resourceTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

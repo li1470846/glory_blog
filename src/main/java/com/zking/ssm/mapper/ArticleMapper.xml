@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Article" >
+    <result column="article_id" property="articleId"></result>
+    <result column="user_id" property="userId"></result>
+    <result column="article_title" property="articleTitle"></result>
+    <result column="article_type_id" property="articleTypeId"></result>
+    <result column="article_classfy_id" property="articleClassfyId"></result>
+    <result column="article_public" property="articlePublic"></result>
+    <result column="article_state" property="articleState"></result>
+    <result column="article_date" property="articleDate"></result>
+    <result column="last_update_date" property="lastUpdateDate"></result>
+    <result column="article_index" property="articleIndex"></result>
+    <result column="article_comment_flag" property="articleCommentFlag"></result>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zking.ssm.model.Article" >
+    <constructor >
+      <idArg column="article_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="article_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="article_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_classfy_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_public" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="last_update_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="article_index" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_comment_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="article_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    article_id, user_id, article_title, article_type_id, article_classfy_id, article_public, 
+    article_state, article_date, last_update_date, article_index, article_comment_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    article_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+    <select id="list" resultMap="BaseResultMap">
+      select * from t_article
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Article" >
+    insert into t_article (article_id, user_id, article_title, 
+      article_type_id, article_classfy_id, article_public, 
+      article_state, article_date, last_update_date, 
+      article_index, article_comment_flag, article_content
+      )
+    values (#{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleTypeId,jdbcType=INTEGER}, #{articleClassfyId,jdbcType=INTEGER}, #{articlePublic,jdbcType=INTEGER}, 
+      #{articleState,jdbcType=INTEGER}, #{articleDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{articleIndex,jdbcType=INTEGER}, #{articleCommentFlag,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Article" >
+    insert into t_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="articleTitle != null" >
+        article_title,
+      </if>
+      <if test="articleTypeId != null" >
+        article_type_id,
+      </if>
+      <if test="articleClassfyId != null" >
+        article_classfy_id,
+      </if>
+      <if test="articlePublic != null" >
+        article_public,
+      </if>
+      <if test="articleState != null" >
+        article_state,
+      </if>
+      <if test="articleDate != null" >
+        article_date,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="articleIndex != null" >
+        article_index,
+      </if>
+      <if test="articleCommentFlag != null" >
+        article_comment_flag,
+      </if>
+      <if test="articleContent != null" >
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="articleClassfyId != null" >
+        #{articleClassfyId,jdbcType=INTEGER},
+      </if>
+      <if test="articlePublic != null" >
+        #{articlePublic,jdbcType=INTEGER},
+      </if>
+      <if test="articleState != null" >
+        #{articleState,jdbcType=INTEGER},
+      </if>
+      <if test="articleDate != null" >
+        #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleIndex != null" >
+        #{articleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentFlag != null" >
+        #{articleCommentFlag,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Article" >
+    update t_article
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null" >
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeId != null" >
+        article_type_id = #{articleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="articleClassfyId != null" >
+        article_classfy_id = #{articleClassfyId,jdbcType=INTEGER},
+      </if>
+      <if test="articlePublic != null" >
+        article_public = #{articlePublic,jdbcType=INTEGER},
+      </if>
+      <if test="articleState != null" >
+        article_state = #{articleState,jdbcType=INTEGER},
+      </if>
+      <if test="articleDate != null" >
+        article_date = #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleIndex != null" >
+        article_index = #{articleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentFlag != null" >
+        article_comment_flag = #{articleCommentFlag,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null" >
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zking.ssm.model.Article" >
+    update t_article
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_type_id = #{articleTypeId,jdbcType=INTEGER},
+      article_classfy_id = #{articleClassfyId,jdbcType=INTEGER},
+      article_public = #{articlePublic,jdbcType=INTEGER},
+      article_state = #{articleState,jdbcType=INTEGER},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      article_index = #{articleIndex,jdbcType=INTEGER},
+      article_comment_flag = #{articleCommentFlag,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Article" >
+    update t_article
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_type_id = #{articleTypeId,jdbcType=INTEGER},
+      article_classfy_id = #{articleClassfyId,jdbcType=INTEGER},
+      article_public = #{articlePublic,jdbcType=INTEGER},
+      article_state = #{articleState,jdbcType=INTEGER},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      article_index = #{articleIndex,jdbcType=INTEGER},
+      article_comment_flag = #{articleCommentFlag,jdbcType=INTEGER}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>

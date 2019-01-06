@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ResourceClassfyMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.ResourceClassfy" >
+    <constructor >
+      <idArg column="resource_classfy_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resource_classfy_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resource_classfy_id, resource_classfy_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource_classfy
+    where resource_classfy_id = #{resourceClassfyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resource_classfy
+    where resource_classfy_id = #{resourceClassfyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.ResourceClassfy" >
+    insert into t_resource_classfy (resource_classfy_id, resource_classfy_name
+      )
+    values (#{resourceClassfyId,jdbcType=INTEGER}, #{resourceClassfyName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.ResourceClassfy" >
+    insert into t_resource_classfy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceClassfyId != null" >
+        resource_classfy_id,
+      </if>
+      <if test="resourceClassfyName != null" >
+        resource_classfy_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceClassfyId != null" >
+        #{resourceClassfyId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceClassfyName != null" >
+        #{resourceClassfyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.ResourceClassfy" >
+    update t_resource_classfy
+    <set >
+      <if test="resourceClassfyName != null" >
+        resource_classfy_name = #{resourceClassfyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_classfy_id = #{resourceClassfyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.ResourceClassfy" >
+    update t_resource_classfy
+    set resource_classfy_name = #{resourceClassfyName,jdbcType=VARCHAR}
+    where resource_classfy_id = #{resourceClassfyId,jdbcType=INTEGER}
+  </update>
+</mapper>
